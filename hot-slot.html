@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BALAKLAVA CAZINO</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #2d004d, #000000);
+      font-family: 'Arial', sans-serif;
+      color: white;
+      text-align: center;
+    }
+    header {
+      background-color: #7f00ff;
+      padding: 1rem;
+      font-size: 2rem;
+      font-weight: bold;
+      text-shadow: 0 0 10px yellow;
+    }
+    .online-counter {
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
+      color: #00ffcc;
+    }
+    .login {
+      margin: 2rem auto;
+      background-color: #1a0033;
+      padding: 1rem;
+      border-radius: 10px;
+      width: 300px;
+      box-shadow: 0 0 10px #00cc99;
+    }
+    .login input, .register input {
+      display: block;
+      margin: 0.5rem auto;
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: none;
+      width: 90%;
+    }
+    .login button, .register button, .telegram, .slot button {
+      margin-top: 0.5rem;
+      background: #ff3399;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    .games, .bonus, .register, .note, .slot {
+      display: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .bonus {
+      background-color: #290044;
+      margin: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #ffcc00;
+      font-size: 1.2rem;
+    }
+    .slot {
+      flex-direction: column;
+      align-items: center;
+    }
+    .play-link {
+      background-color: #00cc99;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      margin: 0.5rem;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 0 10px #00cc99;
+    }
+  </style>
+</head>
+<body>
+  <header>BALAKLAVA CAZINO</header>
+  <div class="online-counter" id="online">0 игроков онлайн</div>
+
+  <div class="login">
+    <h3>Вход</h3>
+    <input type="text" id="login-name" placeholder="Имя">
+    <input type="password" id="login-pass" placeholder="Пароль">
+    <button onclick="login()">Войти</button>
+  </div>
+
+  <section class="games" id="games">
+    <a href="hot-slot.html" class="play-link">🎰 Играть в Hot Slot</a>
+    <div class="note">
+      💰 Чтобы играть, нужно купить доступ — пиши в <a class="telegram" href="https://t.me/Pilotco2" target="_blank">Telegram @Pilotco2</a>
+    </div>
+  </section>
+
+  <section class="bonus" id="bonus">
+    🎉 Получи 30₴ бонуса при регистрации!
+  </section>
+
+  <section class="register" id="register">
+    <input type="text" placeholder="Имя">
+    <input type="email" placeholder="Email">
+    <button onclick="alert('Регистрация завершена! Ваш бонус: 30₴')">Зарегистрироваться</button>
+  </section>
+
+  <script>
+    function randomOnline() {
+      document.getElementById('online').innerText = Math.floor(Math.random() * 400 + 50) + ' игроков онлайн';
+    }
+
+    function login() {
+      const name = document.getElementById('login-name').value;
+      const pass = document.getElementById('login-pass').value;
+      if (name && pass.length >= 3) {
+        document.querySelector('.login').style.display = 'none';
+        document.getElementById('games').style.display = 'flex';
+        document.getElementById('bonus').style.display = 'flex';
+        document.getElementById('register').style.display = 'flex';
+      } else {
+        alert('Неверное имя или пароль (минимум 3 символа)');
+      }
+    }
+
+    setInterval(randomOnline, 3000);
+    window.onload = randomOnline;
+  </script>
+</body>
+</html>
