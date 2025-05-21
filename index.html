@@ -1,1 +1,34 @@
-
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>BALAKLAVA CAZINO</title>
+</head>
+<body>
+    <header>
+        <h1>BALAKLAVA CAZINO</h1>
+        <div class="balance">Баланс: <span id="balance">0₴</span></div>
+        <div class="login">
+            <button onclick="toggleLogin()">Вход</button>
+        </div>
+    </header>
+    <main>
+        <div class="banner">
+            <img src="banner.jpg" alt="Баннер казино">
+        </div>
+        <div class="games">
+            <h2>Игры</h2>
+            <div class="game-card" onclick="location.href='hot-slot.html'">Hot Slot</div>
+            <div class="game-card" onclick="location.href='candy-boom.html'">Candy Boom</div>
+            <div class="game-card" onclick="location.href='lightning-reels.html'">Lightning Reels</div>
+            <div class="game-card" onclick="location.href='gates-of-olympus.html'">Gates of Olympus</div>
+        </div>
+    </main>
+    <footer>
+        <p>Поддержка в Telegram: <a href="https://t.me/Pilotco2">@Pilotco2</a></p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
