@@ -19,11 +19,11 @@
       font-weight: bold;
       text-shadow: 0 0 10px yellow;
     }
-    .games {
+    .games, .bonus, .register, .note {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      padding: 2rem;
+      padding: 1rem;
     }
     .game {
       background-color: #1a0033;
@@ -33,8 +33,8 @@
       width: 200px;
       box-shadow: 0 0 10px gold;
     }
-    .telegram {
-      margin-top: 2rem;
+    .telegram, .register button {
+      margin-top: 1rem;
       background: #ff3399;
       padding: 1rem;
       border-radius: 8px;
@@ -43,19 +43,51 @@
       color: white;
       font-weight: bold;
       box-shadow: 0 0 10px #ff3399;
+      border: none;
+      cursor: pointer;
+    }
+    .bonus {
+      background-color: #290044;
+      margin: 1rem;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #ffcc00;
+      font-size: 1.2rem;
+    }
+    .online-counter {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      color: #00ffcc;
+    }
+    input {
+      margin: 0.5rem;
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: none;
     }
     footer {
-      margin-top: 3rem;
+      margin-top: 2rem;
       padding: 1rem;
       background: #1a0033;
       font-size: 0.9rem;
     }
   </style>
+  <script>
+    // Фейковый счётчик онлайна
+    function randomOnline() {
+      const el = document.getElementById('online');
+      el.innerText = Math.floor(Math.random() * 500) + 50 + ' игроков онлайн';
+    }
+    setInterval(randomOnline, 3000);
+    window.onload = randomOnline;
+  </script>
 </head>
 <body>
   <header>
     BALAKLAVA CAZINO
   </header>
+
+  <div class="online-counter" id="online">0 игроков онлайн</div>
 
   <section class="games">
     <div class="game">🔥 Hot Slot</div>
@@ -64,9 +96,19 @@
     <div class="game">⚔️ Gates of Olympus</div>
   </section>
 
-  <a class="telegram" href="https://t.me/Pilotco2" target="_blank">
-    💸 Пополнить баланс — Telegram @Pilotco2
-  </a>
+  <section class="bonus">
+    🎉 Получи 30₴ бонуса при регистрации!
+  </section>
+
+  <section class="register">
+    <input type="text" placeholder="Имя">
+    <input type="email" placeholder="Email">
+    <button>Зарегистрироваться</button>
+  </section>
+
+  <section class="note">
+    🕹️ Чтобы играть, нужно купить доступ — пиши в <a class="telegram" href="https://t.me/Pilotco2" target="_blank">Telegram @Pilotco2</a>
+  </section>
 
   <footer>
   </footer>
