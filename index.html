@@ -19,7 +19,12 @@
       font-weight: bold;
       text-shadow: 0 0 10px yellow;
     }
-    .games, .bonus, .register, .note {
+    .online-counter {
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
+      color: #00ffcc;
+    }
+    .games {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -30,40 +35,67 @@
       margin: 1rem;
       padding: 1rem;
       border-radius: 12px;
-      width: 200px;
+      width: 220px;
       box-shadow: 0 0 10px gold;
     }
-    .telegram, .register button {
-      margin-top: 1rem;
-      background: #ff3399;
-      padding: 1rem;
-      border-radius: 8px;
-      display: inline-block;
-      text-decoration: none;
+    .game button {
+      margin-top: 0.5rem;
+      background: #00cc99;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
       color: white;
       font-weight: bold;
-      box-shadow: 0 0 10px #ff3399;
-      border: none;
       cursor: pointer;
+    }
+    .bonus, .register, .note {
+      padding: 1rem;
     }
     .bonus {
       background-color: #290044;
       margin: 1rem;
-      padding: 1rem;
       border-radius: 12px;
       box-shadow: 0 0 10px #ffcc00;
       font-size: 1.2rem;
     }
-    .online-counter {
-      margin-top: 1rem;
-      font-size: 1.1rem;
-      color: #00ffcc;
-    }
-    input {
+    .register input {
       margin: 0.5rem;
       padding: 0.5rem;
       border-radius: 5px;
       border: none;
+    }
+    .register button {
+      margin-top: 0.5rem;
+      background: #ff3399;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    .telegram {
+      display: inline-block;
+      margin-top: 1rem;
+      background: #ff3399;
+      padding: 1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 0 10px #ff3399;
+    }
+    .win-notice {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #222;
+      color: #0f0;
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #0f0;
+      display: none;
     }
     footer {
       margin-top: 2rem;
@@ -73,26 +105,62 @@
     }
   </style>
   <script>
+    let balance = 30;
+
     function randomOnline() {
-      const el = document.getElementById('online');
-      el.innerText = Math.floor(Math.random() * 500) + 50 + ' игроков онлайн';
+      document.getElementById('online').innerText = Math.floor(Math.random() * 400 + 50) + ' игроков онлайн';
     }
+
+    function showWinNotice() {
+      const wins = [
+        'Игрок Андрей выиграл 240₴ в Candy Boom',
+        'Игрок Марина сорвала x100 в Hot Slot!',
+        'Кто-то выиграл 500₴ в Gates of Olympus'
+      ];
+      const text = wins[Math.floor(Math.random() * wins.length)];
+      const notice = document.getElementById('win-notice');
+      notice.innerText = text;
+      notice.style.display = 'block';
+      setTimeout(() => notice.style.display = 'none', 5000);
+    }
+
+    function playGame(gameName) {
+      if (balance < 5) {
+        alert('Недостаточно средств! Пополните через Telegram.');
+        return;
+      }
+      balance -= 5;
+      const win = Math.random() < 0.5 ? Math.floor(Math.random() * 20 + 5) : 0;
+      balance += win;
+      alert(`Вы играли в ${gameName}. Выигрыш: ${win}₴. Новый баланс: ${balance}₴`);
+    }
+
     setInterval(randomOnline, 3000);
+    setInterval(showWinNotice, 10000);
     window.onload = randomOnline;
   </script>
 </head>
 <body>
-  <header>
-    BALAKLAVA CAZINO
-  </header>
-
+  <header>BALAKLAVA CAZINO</header>
   <div class="online-counter" id="online">0 игроков онлайн</div>
 
   <section class="games">
-    <div class="game">🔥 Hot Slot</div>
-    <div class="game">⚡ Lightning Reels</div>
-    <div class="game">🎁 Candy Boom</div>
-    <div class="game">⚔️ Gates of Olympus</div>
+    <div class="game">
+      🔥 Hot Slot<br>
+      <button onclick="playGame('Hot Slot')">Играть</button>
+    </div>
+    <div class="game">
+      ⚡ Lightning Reels<br>
+      <button onclick="playGame('Lightning Reels')">Играть</button>
+    </div>
+    <div class="game">
+      🎁 Candy Boom<br>
+      <button onclick="playGame('Candy Boom')">Играть</button>
+    </div>
+    <div class="game">
+      ⚔️ Gates of Olympus<br>
+      <button onclick="playGame('Gates of Olympus')">Играть</button>
+    </div>
   </section>
 
   <section class="bonus">
@@ -102,13 +170,14 @@
   <section class="register">
     <input type="text" placeholder="Имя">
     <input type="email" placeholder="Email">
-    <button>Зарегистрироваться</button>
+    <button onclick="alert('Регистрация завершена! Ваш бонус: 30₴')">Зарегистрироваться</button>
   </section>
 
   <section class="note">
-    🕹️ Чтобы играть, нужно купить доступ — пиши в 
-    <a class="telegram" href="https://t.me/Pilotco2" target="_blank">Telegram @Pilotco2</a>
+    💰 Чтобы играть, нужно купить доступ — пиши в <a class="telegram" href="https://t.me/Pilotco2" target="_blank">Telegram @Pilotco2</a>
   </section>
+
+  <div class="win-notice" id="win-notice"></div>
 
   <footer></footer>
 </body>
